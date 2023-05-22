@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Attendance Marksheet</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .container {
+      max-width: 800px;
+    }
+
+    #form-container {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border: 2px solid #c4c2c282;
+      border-radius: 10px;
+      width: auto;
+      margin-top: 10px;
+      background-color: #9BA4B5;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    table {
+    margin-top: 20px;
+      width: 90%;
+      border: 1px solid #dee2e6;
+      border-collapse: collapse;
+  
+    }
+
+    .table thead th {
+      /* background-color: #007bff; */
+      color: #090909;
+    }
+
+    .table tbody tr:nth-of-type(even) {
+      background-color: #f2f2f2;
+    }
+
+    th {
+      text-align: center;
+      font-weight: bold;
+      background-color: #f8f9fa;
+    }
+
+    td {
+      text-align: center;
+    }
+    .table-responsive{
+      max-width: 100%;
+      font-size: 10px;
+    }
+    .empdetails{
+      background: #98EECC;
+    }
+    #sai{
+background-color: #FFD95A;
+    }
+    #sai1{
+      background-color: lightgreen;
+    }
+    #sai2{
+      background-color: lightcoral;
+    }
+  </style>
+
+</head>
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block body_bolck %}
+
+<div class="container mt-2">
+  <form method="post" action="">
+    <div class="row">
+      <div class="col" id="form-container">
+        
+
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="empid">Employee ID:</label>
+              <input type="text" id="empid" name="empid" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="month">Month:</label>
+              <input type="month" id="month" name="month" class="form-control" required>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-primary" style="margin-top: 33px;">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+{% if dates %}
+  
+
+
+<div id="attendance-table" class="table-responsive">
+  <table id="tab" class="table table-bordered custom-table">
+    <thead>
+      <tr><th colspan="{{colspan}}" style="background-color: #ECF2FF;text-align: center;color: black;"> <h3>Trackoworld</h3></td></tr>
+      <tr><th colspan="{{colspan}}"  style="background-color: #98EECC">Employee Name : {{name}} </th></tr>
+      <tr><th colspan="{{colspan}}"  style="background-color: #98EECC;">Employee Id : {{empid}} </th></tr>
+      <tr><th colspan="{{colspan}}"  style="background-color: #98EECC;">Department : {{dpt}} </th></tr>
+      <tr><th colspan="{{colspan}}" style="background-color: #98EECC;">Designation : {{designation}} </th></tr>
+      <tr>
+        
+        <th colspan="{{colspan}}"  style="background-color:#AEE2FF;text-align: center;color: black;"> <h3>Attendance For The Month Of {{month}}</h3></th>
+        
+      </tr>
+      <tr>
+        {% for i in dates  %}
+          <th>{{forloop.counter}}</th>
+        {% endfor %}
+        <th  id="sai">Total Days</th>
+        <th  id="sai1">Total Present</th>
+        <th  id="sai2">Total Absent</th>
+      </tr>
+      <tr>
+        {% for i in dates  %}
+          <th>{{i}}</th>
+        {% endfor %}
+        <th>{{total}}</th>
+        <th>{{present}}</th>
+        <th>{{absent}}</th>
+      </tr>
+    </thead>
+    <tbody id="attendance-table-body">
+      <!-- Add more rows for other employees -->
+    </tbody>
+  </table>
+</div>
+</div>
+{% endif %}
+
+
+ <!-- Button trigger modal -->
+<button type="button" id="success_model" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Trackoworld</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="info">
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if recnotfound %}
+  <script>   
+    document.getElementById("success_model").click();  
+    document.getElementById("info").innerHTML = "No records found for selected month"; 
+  </script>
+{% endif %}
+
+{% if notfound %}
+  <script>   
+    document.getElementById("success_model").click();  
+    document.getElementById("info").innerHTML = "Empolyee ID is Not found"; 
+  </script>
+{% endif %}
+
+
+
+
+<script>
+  document.getElementById("man_attendance1").style.color = "blue";
+
+</script>
+
+
+
+{% endblock body_bolck %}
