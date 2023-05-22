@@ -12,7 +12,7 @@
   <div class="alert" id="alrt" role="alert"></div>
   <div class="container">
     <div class="form-container" id="formcontainer">
-          <form action="/employee_details/emp_update/{{result.6}}/" method="post" class="form">
+          <form action="{% url 'employee_update' result.6 %}" method="post" class="form">
           
             <div class="row" >
               <div class="col-md-6" style="margin-top: -100px;">
@@ -74,7 +74,7 @@
             
             <div class="form-group1" id="form1">
               <input type="submit" value="SAVE" class="btn btn-primary">
-            <a href="/employee_details/emp_list/">  <input type="button" value="BACK" class="btn btn-primary" style="margin-left:50px ;"></a>
+            <a href="{% url 'employee_list' %}">  <input type="button" value="BACK" class="btn btn-primary" style="margin-left:50px ;"></a>
             </div>
           </div>
           </form>

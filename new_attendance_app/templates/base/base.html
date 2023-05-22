@@ -71,26 +71,26 @@
     <li id="profile">
      <h5><i class="fa fa-user" aria-hidden="true"></i> Profile</h5>
      </li>
-		<li> <a href="/login/homepage/" class="navitem"><i class="fa fa-home"></i> Home</a></li>
+		<li> <a href="{% url 'home' %}" class="navitem"><i class="fa fa-home"></i> Home</a></li>
 		<li>
       <a class="dropdown-btn" id="Attendance_btn"><i class="fa fa-calendar-alt"></i> Attendance 
       </a>
       <div class="dropdown-container">
-        <a href="/employee_attendance/emp_report/" id="emp_rep" class="drpa">Employee Report</a>
-        <a href="/employee_attendance/all_empreports/" id="all_emp" class="drpa">Overall Report</a>
-        <a href="/employee_attendance/count_reports/" id="all_emp_count">Total Report</a>
+        <a href="{% url 'individual_report' %}" id="emp_rep" class="drpa">Employee Report</a>
+        <a href="{% url 'totaldetailed_report' %}" id="all_emp" class="drpa">Overall Report</a>
+        <a href="{% url 'total_report' %}" id="all_emp_count">Total Report</a>
         <a href="{% url 'manual_attendance_update' %}"  id="man_attendance" class="drpa">Manual update</a>
         <a href="{% url 'manual_attendance_display' %}"  id="man_attendance1" class="drpa">Manual Attendence</a>
-        <a href="/employee_details/employee_registration/" id="emp_details" class="drpa"> Registration</a>
-        <a href="/employee_details/emp_list/" id="emp_list" class="drpa"> Employee list</a>
+        <a href="{% url 'employee_registration' %}" id="emp_details" class="drpa"> Registration</a>
+        <a href="{% url 'employee_list' %}" id="emp_list" class="drpa"> Employee list</a>
       </div></li>
 		<li><a class="dropdown-btn" id="settings" class="navitem"><i class="fa fa-cog"></i> Settings 
     </a>
     <div class="dropdown-container">
-      <a href="/gate_config/gate_configurations/" id="gate_config" class="drpa" >Gate Configuration</a>
+      <a href="{% url 'gate_configuration' %}" id="gate_config" class="drpa" >Gate Configuration</a>
       
     </div></li>
-		<li><a href="/change_pwd/" class="navitem"><i class="fa fa-key" ></i> Change Password</a></li>
+		<li><a href="{% url 'change_password' %}" class="navitem"><i class="fa fa-key" ></i> Change Password</a></li>
 		<li><a href="/gate_config/live" class="navitem"><i class="fas fa-stream" ></i> LIVE</a></li>
 	</ul>
 	</div>
